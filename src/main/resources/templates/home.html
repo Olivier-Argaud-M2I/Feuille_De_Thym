@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>Home</title>
+  </head>
+  <body>
+
+<!--    <h1>Coucou</h1>-->
+
+
+    <span data-th-text="${message}">Welcome to our grocery store!</span>
+
+    <h1 th:text="${message}"></h1>
+
+    <div th:if="${todos}">
+      <div th:each="todo : ${todos}" >
+
+          <div th:text="'Tache : '+${todo.name}"/>
+          <div th:text="'Description : '+${todo.description}"/>
+
+      </div>
+
+    </div>
+
+
+
+
+
+
+  </body>
+</html>
