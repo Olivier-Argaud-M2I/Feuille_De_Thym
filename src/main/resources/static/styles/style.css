@@ -1,0 +1,33 @@
+
+body{
+    background-color: #eee;
+}
+
+.baliseth{
+    width: 75%;
+    text-align: center;
+    background-color: bisque;
+}
+
+.balisedata{
+    width: 75%;
+    text-align: center;
+    background-color: chocolate;
+}
+
+.baliseform{
+    width: 75%;
+    text-align: center;
+    background-color: navajowhite;
+}
+
+h1 {
+    position: relative;
+    margin: 100px 0 25px 0;
+    font-size: 2.3em;
+    text-align: center;
+    letter-spacing: 7px;
+}
+
+
+

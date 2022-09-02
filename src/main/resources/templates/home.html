@@ -1,30 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html
+        xmlns="http://www.w3.org/1999/xhml"
+        xmlns:th="http://www.thymeleaf.org"
+        lang="en"
+
+>
   <head>
       <meta charset="UTF-8">
       <title>Home</title>
+      <link data-th-href="@{/styles/style.css}" rel="stylesheet">
   </head>
   <body>
 
-<!--    <h1>Coucou</h1>-->
 
 
-    <span data-th-text="${message}">Welcome to our grocery store!</span>
 
-    <h1 th:text="${message}"></h1>
+<!--    <h1 th:text="${message} + ' avec des balises th: '"></h1>-->
 
     <div th:if="${todos}">
       <div th:each="todo : ${todos}" >
 
-          <div th:text="'Tache : '+${todo.name}"/>
-          <div th:text="'Description : '+${todo.description}"/>
+<!--          <div th:text="'Tache : '+${todo.name}"/>-->
+<!--          <div th:text="'Description : '+${todo.description}"/>-->
 
-      </div>
+
+<!--      </div>-->
+<!--    </div>-->
+
+
+    <h1 data-th-text="${message} + ' avec des balises data '"></h1>
+
+    <div class="balisedata" data-th-if="${todos}">
+
+
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Supprimer</th>
+                    <th>Editer</th>
+                </tr>
+                <tr data-th-each="todoeach : ${todos}">
+                    <td data-th-text="${todoeach.id}"></td>
+                    <td data-th-text="${todoeach.name}"></td>
+                    <td data-th-text="${todoeach.description}"></td>
+                    <td>
+                        <form action="#" method="post" data-th-action="@{/delete}"  accept-charset="utf-8">
+                            <input type="hidden" data-th-value="${todoeach.id}" data-th-name="id">
+                            <input type="hidden" data-th-value="${todoeach.name}" data-th-name="name">
+                            <input type="hidden" data-th-value="${todoeach.description}" data-th-name="description">
+                            <input type="submit" value="Supprimer">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="#" method="post" data-th-action="@{/editer}"  accept-charset="utf-8">
+                            <input type="hidden" data-th-value="${todoeach.id}" data-th-name="id">
+                            <input type="hidden" data-th-value="${todoeach.name}" data-th-name="name">
+                            <input type="hidden" data-th-value="${todoeach.description}" data-th-name="description">
+                            <input type="submit" value="Editer">
+                        </form>
+                    </td>
+                </tr>
+
+            </table>
 
     </div>
 
+    <div class="baliseform">
+        <form action="#" method="post" data-th-action="@{/form}" data-th-object="${todo}" accept-charset="utf-8">
 
+            <input type="hidden" data-th-field="*{id}">
+            <input type="text" data-th-field="*{name}">
+            <input type="text" data-th-field="*{description}">
 
+            <input type="submit" value="Valider">
+        </form>
+    </div>
 
 
 
