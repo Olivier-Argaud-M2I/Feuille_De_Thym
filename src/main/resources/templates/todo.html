@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhml"
+        xmlns:th="http://www.thymeleaf.org"
+        lang="en"
+
+>
+  <head>
+      <meta charset="UTF-8">
+      <title>Home</title>
+      <link data-th-href="@{/styles/style.css}" rel="stylesheet">
+  </head>
+  <body>
+
+    <div data-th-replace="~{fragments/navBar :: navBar}"></div>
+
+
+
+<!--    <h1 th:text="${message} + ' avec des balises th: '"></h1>-->
+
+<!--    <div class="baliseth" th:if="${todos}">-->
+<!--      <div th:each="todo : ${todos}" >-->
+
+<!--          <div th:text="'Tache : '+${todo.name}"/>-->
+<!--          <div th:text="'Description : '+${todo.description}"/>-->
+
+
+<!--      </div>-->
+<!--    </div>-->
+
+
+<!--    <h1 data-th-text="${message} + ' avec des balises data '"></h1>-->
+    <h1 data-th-text="#{todo.youpi}"></h1>
+
+
+    <div class="balisedata" data-th-if="${todos}">
+
+
+            <table>
+                <tr>
+                    <th class="col-1" >Id</th>
+                    <th class="col-2" data-th-text="#{todo.name}"></th>
+                    <th class="col-5" data-th-text="#{todo.description}"></th>
+                    <th class="col-1" data-th-text="#{todo.delete}"></th>
+                    <th class="col-1" data-th-text="#{todo.edit}"></th>
+                </tr>
+                <tr data-th-each="todoeach : ${todos}">
+                    <td class="col-1" data-th-text="${todoeach.id}" data-th-data-id="${todoeach.id}" data-th-onClick="editer(this.getAttribute('data-id'))"></td>
+                    <td class="col-2" data-th-text="${todoeach.name}"data-th-data-id="${todoeach.id}" data-th-onClick="editer(this.getAttribute('data-id'))"></td>
+                    <td class="col-5" data-th-text="${todoeach.description}"data-th-data-id="${todoeach.id}" data-th-onClick="editer(this.getAttribute('data-id'))"></td>
+                    <td class="col-1" >
+                        <form action="#" method="post" data-th-action="@{/delete}"  accept-charset="utf-8">
+                            <input type="hidden" data-th-value="${todoeach.id}" data-th-name="id" id="id">
+                            <input type="hidden" data-th-value="${todoeach.name}" data-th-name="name">
+                            <input type="hidden" data-th-value="${todoeach.description}" data-th-name="description">
+                            <input class="btnSupr" type="submit" data-th-value="#{todo.delete}">
+                        </form>
+                    </td>
+                    <td class="col-1" >
+                        <form action="#" method="post" data-th-action="@{/editer}"  accept-charset="utf-8">
+                            <input type="hidden" data-th-value="${todoeach.id}" data-th-name="id">
+                            <input type="hidden" data-th-value="${todoeach.name}" data-th-name="name">
+                            <input type="hidden" data-th-value="${todoeach.description}" data-th-name="description">
+                            <input data-th-id="editer+${todoeach.id}" class="btnEditer" type="submit" data-th-value="#{todo.edit}">
+                        </form>
+                    </td>
+                </tr>
+
+            </table>
+
+    </div>
+
+    <h2 data-th-text="#{todo.create}"></h2>
+    <div class="baliseform">
+        <form action="#" method="post" data-th-action="@{/form}" data-th-object="${todo}" accept-charset="utf-8">
+
+
+            <input type="hidden" data-th-field="*{id}">
+
+            <label for="name" data-th-text="#{todo.name}"></label><br>
+            <input id="name" type="text" data-th-field="*{name}"><br>
+
+            <label for="description" data-th-text="#{todo.description}"></label><br>
+            <input id="description" type="text" data-th-field="*{description}"><br>
+
+
+            <input class="btnValider" type="submit" data-th-value="#{todo.valid}">
+        </form>
+    </div>
+
+    <div data-th-replace="~{fragments/footer :: footer}"></div>
+
+  <script>
+      function editer(id){
+          document.getElementById("editer"+id).click()
+      }
+  </script>
+
+  </body>
+</html>

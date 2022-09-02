@@ -22,31 +22,24 @@ public class TodoController {
     @Autowired
     TodoService todoService;
 
-    @GetMapping(path = "/home")
+
+    @GetMapping(path = "/todo")
     public String home(ModelMap model, @ModelAttribute Todo todo){
         model.put("todos",todoService.getTodos());
-        model.put("message","youpi ca marche");
+        model.put("message","Youpi ca marche");
         if(tododTemp!=null){
             todo.setId(tododTemp.getId());
             todo.setName(tododTemp.getName());
             todo.setDescription(tododTemp.getDescription());
         }
-        return "home";
-    }
-
-    @GetMapping(path = "/home2")
-    public String home2(ModelMap model){
-//        model.put("todos",todoService.getTodos());
-//        return new ModelAndView("home","todos",model);
-        model.put("message","youpi ca marche");
-        return "home";
+        return "todo";
     }
 
 
     @GetMapping(path = "/form")
     public String initForm(@ModelAttribute Todo todo){
 
-        return "home";
+        return "todo";
     }
 
 
@@ -58,7 +51,7 @@ public class TodoController {
         todoService.createTodo(todo);
 
         tododTemp = null;
-        return "redirect:/home";
+        return "redirect:/todo";
     }
 
 
@@ -68,7 +61,7 @@ public class TodoController {
 
         todoService.deleteTodo(todo);
 
-        return "redirect:/home";
+        return "redirect:/todo";
     }
 
     @PostMapping("/editer")
@@ -76,7 +69,7 @@ public class TodoController {
     public String editerlTodo(@ModelAttribute Todo todo){
         tododTemp = todo;
 
-        return "redirect:/home";
+        return "redirect:/todo";
     }
 
 
